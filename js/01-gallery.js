@@ -29,5 +29,15 @@ function onClick(eve) {
   if (!eve.target.dataset) {
     return;
   }
-  console.log(eve.target.dataset.source);
+  const instance = basicLightbox.create(`
+    <img src="${eve.target.dataset.source}" width="800" height="600">
+`);
+  instance.show(eve.target.dataset.source);
+  document.addEventListener("keydown", (eve) => {
+    eve.preventDefault();
+    if (eve.code !== "Escape") {
+      return;
+    }
+    instance.close();
+  });
 }
